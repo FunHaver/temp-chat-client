@@ -1,4 +1,4 @@
-# TempChatClient
+# TempChat Client
 The client code for the Temp Chat application.
 
 ## Angular CLI information

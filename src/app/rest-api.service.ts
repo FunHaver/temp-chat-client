@@ -7,7 +7,7 @@ import { catchError, throwError } from 'rxjs';
 })
 export class RestApiService {
 
-  private rootUrl: string = '';
+  private rootUrl: string = 'http://localhost:3000';
   private apiBase = 'api';
   private apiUrl = ''; 
 
@@ -33,7 +33,7 @@ export class RestApiService {
     }
 
     return throwError(()=>{
-      new Error('Error with API Request.')
+      return new Error('Error with API Request.')
     });
   }
 
