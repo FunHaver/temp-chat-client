@@ -25,6 +25,14 @@ export class RestApiService {
     )
   }
 
+  apiPost(endPoint: string, payload: object){
+    let apiEndpoint: string = `${this.apiUrl}/${endPoint}`;
+    return this.http.post(apiEndpoint, payload, { observe: 'response' })
+    .pipe(
+      catchError(this.handleError)
+    )
+  }
+
   handleError(error: HttpErrorResponse){
     if(error.status === 0){
       console.error('Request Error: ', error.error);
@@ -37,11 +45,4 @@ export class RestApiService {
     });
   }
 
-  hello(){
-    const helloRequest = this.apiGet('hello');
-    helloRequest.subscribe(res => {
-      console.log(res.headers);
-      console.log(res.body);
-    })
-  }
 }

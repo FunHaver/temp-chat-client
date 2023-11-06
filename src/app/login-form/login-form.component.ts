@@ -1,15 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
+import { ChatRoomService } from '../services/chat-room.service';
 
 @Component({
   selector: 'app-login-form',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   template: `
-  <form [formGroup]="loginForm" (submit)="login()">
+  <form [formGroup]="loginForm" (submit)="chatRoomService.generateRoom(loginForm.value)">
     <label for="username">Username: </label>
     <input id="username" type="text" formControlName="username">
+    <input id="generateRoom" [hidden]="true" type="checkbox" formControName="generateRoom">
     <button type="submit">Create Room</button>
 </form>
   `,
@@ -17,10 +19,8 @@ import { ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
 })
 export class LoginFormComponent {
   loginForm = new FormGroup({
-    username: new FormControl('')
+    username: new FormControl(''),
+    generateRoom: new FormControl(true)
   })
-
-  login = function(){
-    //foo 
-  }
+  chatRoomService:ChatRoomService = inject(ChatRoomService);
 }
