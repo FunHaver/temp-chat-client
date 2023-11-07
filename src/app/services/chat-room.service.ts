@@ -19,9 +19,9 @@ export class ChatRoomService {
         let responseBody: any = resp.body;
         let chatRoom: ChatRoom = responseBody.chatRoom;
         let user: User = responseBody.user;
+        //Todo: add user and room to session store
         this.router.navigateByUrl(`/room/${chatRoom.uniqueId}`);
       }
-
     })
   }
 }
