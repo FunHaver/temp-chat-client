@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { catchError, throwError } from 'rxjs';
 
 @Injectable({
@@ -17,9 +17,16 @@ export class RestApiService {
   }
 
 
-  apiGet(endPoint: string){
+  apiGet(endPoint: string, params?: object){
     let apiEndpoint: string = `${this.apiUrl}/${endPoint}`;
-    return this.http.get(apiEndpoint, { observe: 'response' })
+    let newParams = undefined;
+    if(params){
+      let httpParams = new HttpParams();
+      for(const [key, value] of Object.entries(params)){
+        newParams = httpParams.set(key, value);
+      }
+    }
+    return this.http.get(apiEndpoint, { "observe": 'response', "params": newParams})
     .pipe(
       catchError(this.handleError)
     )
@@ -27,7 +34,7 @@ export class RestApiService {
 
   apiPost(endPoint: string, payload: object){
     let apiEndpoint: string = `${this.apiUrl}/${endPoint}`;
-    return this.http.post(apiEndpoint, payload, { observe: 'response' })
+    return this.http.post(apiEndpoint, payload, { "observe": 'response' })
     .pipe(
       catchError(this.handleError)
     )

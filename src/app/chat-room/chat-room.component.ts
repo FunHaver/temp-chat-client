@@ -1,7 +1,9 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ChatRoomService } from '../services/chat-room.service';
 import { MessageService } from '../services/message.service';
+import { ActivatedRoute } from '@angular/router';
+
 @Component({
   selector: 'app-chat-room',
   standalone: true,
@@ -9,7 +11,6 @@ import { MessageService } from '../services/message.service';
   template: `
     <p>
       chat-room works!
-      {{chatRoomId}}
     </p>
     <input type="text" #chatInput>
     <button type="button" (click)="submitMessage(chatInput)">Send</button>
@@ -20,12 +21,17 @@ import { MessageService } from '../services/message.service';
 export class ChatRoomComponent {
   chatRoomService:ChatRoomService = inject(ChatRoomService);
   messageService:MessageService = inject(MessageService);
-  chatRoomId: string = ''
-  @Input()
-  set id(chatRoomId: string){
-    this.chatRoomId = chatRoomId
-  }
 
+  constructor(private route:ActivatedRoute){}
+  ngOnInit(){
+    let id: string = '';
+    this.route.params.forEach(member => {
+      if(member["id"]){
+        id = member["id"];
+      }
+    })
+    this.chatRoomService.getChatRoom(id);
+  }
   
   submitMessage(chatInput:HTMLInputElement){
     this.messageService.postMessage(chatInput.value);
