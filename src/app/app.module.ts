@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { RestApiService } from './services/rest-api.service';
 import { AppRoutingModule } from './app-routing.module';
+import { SessionStorageService } from './services/session-storage.service';
+import { ChatRoomComponent } from './chat-room/chat-room.component';
 
 @NgModule({
   declarations: [
@@ -15,10 +17,11 @@ import { AppRoutingModule } from './app-routing.module';
     BrowserModule,
     HttpClientModule,
     HomeComponent,
+    ChatRoomComponent,
     ReactiveFormsModule,
     AppRoutingModule
   ],
-  providers: [RestApiService],
+  providers: [RestApiService, SessionStorageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

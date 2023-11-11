@@ -3,14 +3,16 @@ import { RestApiService } from './rest-api.service';
 import { ChatRoom } from '../interfaces/chat-room';
 import { User } from '../interfaces/user';
 import { Router } from '@angular/router';
-import { HttpParams } from '@angular/common/http';
+import { SessionStorageService } from './session-storage.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChatRoomService {
+  
+  constructor(private api: RestApiService, private sessionStorageService: SessionStorageService, private router: Router) { 
 
-  constructor(private api: RestApiService, private router: Router) { }
+  }
   
   generateRoom(loginForm: object) {
     const loginRequest = this.api.apiPost('auth/login', loginForm);
@@ -20,7 +22,8 @@ export class ChatRoomService {
         let responseBody: any = resp.body;
         let chatRoom: ChatRoom = responseBody.chatRoom;
         let user: User = responseBody.user;
-        sessionStorage.setItem("user", JSON.stringify(user));
+        this.sessionStorageService.setSessionUser(user);
+        this.sessionStorageService.setSessionRoom(chatRoom);
         this.router.navigateByUrl(`/room/${chatRoom.uniqueId}`);
       }
     })
