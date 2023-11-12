@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { RestApiService } from './rest-api.service';
 import { Message } from '../interfaces/message';
-import { User } from '../interfaces/user';
-import { ChatRoom } from '../interfaces/chat-room';
 import * as moment from 'moment';
 @Injectable({
   providedIn: 'root'
@@ -10,7 +8,7 @@ import * as moment from 'moment';
 export class MessageService {
   constructor(private api: RestApiService) { }
 
-  validateMessage(user: User | null, chatRoom: ChatRoom | null, content: string | null): Message {
+  validateMessage(user: string | undefined, chatRoom: string | undefined, content: string | null): Message {
     let errorMessage: string = "";
     if(user === null || user === undefined){
       errorMessage += "User not set\n";
@@ -27,9 +25,9 @@ export class MessageService {
     } else {
       return {
          // @ts-ignore 
-        user: user, 
+        userId: user, 
          // @ts-ignore 
-        chatRoom: chatRoom,
+        chatRoomId: chatRoom,
          // @ts-ignore 
         content: content,
         creationTime: moment()
@@ -38,9 +36,6 @@ export class MessageService {
   }
 
   postMessage(message: Message){
-    const newMessageRequest = this.api.apiPost('message/new', message);
-    newMessageRequest.subscribe(resp => {
-      console.log(resp);
-    })
+    return this.api.apiPost('message/new', message);
   }
 }

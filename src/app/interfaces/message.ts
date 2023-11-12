@@ -1,10 +1,12 @@
-import { ChatRoom } from "./chat-room";
 import { Entity } from "./entity";
-import { User } from "./user";
 import { Moment } from "moment";
+import { User } from "./user";
+import { ChatRoom } from "./chat-room";
 export interface Message extends Entity{
-    user: User,
-    chatRoom: ChatRoom,
+    userId: string,
+    user?: User,
+    chatRoomId: string,
+    chatRoom?: ChatRoom,
     content: string,
     creationTime: Moment
 }

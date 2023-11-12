@@ -4,21 +4,21 @@ import { ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
 import { ChatRoomService } from '../services/chat-room.service';
 
 @Component({
-  selector: 'app-login-form',
+  selector: 'app-new-room-form',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   template: `
-  <form [formGroup]="loginForm" (submit)="chatRoomService.generateRoom(loginForm.value)">
-    <label for="username">Username: </label>
-    <input id="username" type="text" formControlName="username">
+  <form [formGroup]="createRoomForm" (submit)="chatRoomService.generateRoom(createRoomForm.value)">
+    <label for="createUsername">Username: </label>
+    <input id="createUsername" type="text" formControlName="username">
     <input id="generateRoom" [hidden]="true" type="checkbox" formControName="generateRoom">
     <button type="submit">Create Room</button>
 </form>
   `,
-  styleUrls: ['./login-form.component.scss']
+  styleUrls: ['./new-room-form.component.scss']
 })
-export class LoginFormComponent {
-  loginForm = new FormGroup({
+export class NewRoomFormComponent {
+  createRoomForm = new FormGroup({
     username: new FormControl(''),
     generateRoom: new FormControl(true)
   })

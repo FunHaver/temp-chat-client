@@ -17,7 +17,6 @@ import { ChatRoomComponent } from './chat-room/chat-room.component';
     BrowserModule,
     HttpClientModule,
     HomeComponent,
-    ChatRoomComponent,
     ReactiveFormsModule,
     AppRoutingModule
   ],

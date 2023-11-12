@@ -5,17 +5,22 @@ import { MessageService } from '../services/message.service';
 import { ActivatedRoute } from '@angular/router';
 import { Message } from '../interfaces/message';
 import { SessionStorageService } from '../services/session-storage.service';
+import { ChatRoom } from '../interfaces/chat-room';
+import { MessageDisplayComponent } from '../message-display/message-display.component';
+import { UsersDisplayComponent } from '../users-display/users-display.component';
+import { User } from '../interfaces/user';
 
 @Component({
   selector: 'app-chat-room',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MessageDisplayComponent, UsersDisplayComponent],
   template: `
-    <p>
-      chat-room works!
-    </p>
+    <app-message-display [messages]="this.chatRoom.messages"></app-message-display>
+    
+ 
     <input type="text" #chatInput>
     <button type="button" (click)="submitMessage(chatInput)">Send</button>
+    <app-users-display [users]="this.chatRoom.users"></app-users-display>
   `,
   styleUrls: ['./chat-room.component.scss']
 })
@@ -23,8 +28,10 @@ import { SessionStorageService } from '../services/session-storage.service';
 export class ChatRoomComponent {
   chatRoomService:ChatRoomService = inject(ChatRoomService);
   messageService:MessageService = inject(MessageService);
-
-  constructor(private route:ActivatedRoute, private sessionStorageService:SessionStorageService){}
+  chatRoom!:ChatRoom;
+  constructor(private route:ActivatedRoute, private sessionStorageService:SessionStorageService){
+    
+  }
   
   ngOnInit(){
     let id: string = '';
@@ -33,12 +40,27 @@ export class ChatRoomComponent {
         id = member["id"];
       }
     })
-    this.chatRoomService.getChatRoom(id);
+    this.chatRoom = this.sessionStorageService.getSessionRoom() as ChatRoom;
+    this.chatRoomService.getUsers(id).subscribe(result => {
+      const users = result.body as Array<User>;
+      if(users){
+        this.chatRoom.users = users;
+      }
+    })
+    this.chatRoomService.getMessages(id).subscribe(result => {
+      const messages = result.body as Array<Message>;
+      if(messages){
+        this.chatRoom.messages = messages
+      }
+    })
   }
   
-  submitMessage(chatInput:HTMLInputElement){
-    let outgoingMessage: Message = this.messageService.validateMessage(this.sessionStorageService.getSessionUser(), this.sessionStorageService.getSessionRoom(), chatInput.value);
-    this.messageService.postMessage(outgoingMessage);
+  async submitMessage(chatInput:HTMLInputElement){
+    let outgoingMessage: Message = this.messageService.validateMessage(this.sessionStorageService.getSessionUser()?.uniqueId, this.sessionStorageService.getSessionRoom()?.uniqueId, chatInput.value);
+    let messagePostRequest = this.messageService.postMessage(outgoingMessage);
+    messagePostRequest.subscribe(response => {
+     //noop for now
+    })
     chatInput.value = '';
   }
 }
