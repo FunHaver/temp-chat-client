@@ -38,9 +38,7 @@ export class MessageService {
   }
 
   postMessage(message: Message){
-    console.log(message);
     const newMessageRequest = this.api.apiPost('message/new', message);
-
     newMessageRequest.subscribe(resp => {
       console.log(resp);
     })

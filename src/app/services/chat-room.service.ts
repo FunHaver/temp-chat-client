@@ -29,10 +29,11 @@ export class ChatRoomService {
     })
   }
 
-  getChatRoom(chatRoomId: string) {
-    const getChatRoom = this.api.apiGet('chatRoom/', {"id": chatRoomId});
+  getChatRoom(id: string) {
+    const getChatRoom = this.api.apiGet('chatRoom/room', {"id": id});
     getChatRoom.subscribe(resp => {
       console.log(resp);
     })
+
   }
 }
