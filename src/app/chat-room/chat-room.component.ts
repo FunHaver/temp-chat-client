@@ -9,6 +9,7 @@ import { ChatRoom } from '../interfaces/chat-room';
 import { MessageDisplayComponent } from '../message-display/message-display.component';
 import { UsersDisplayComponent } from '../users-display/users-display.component';
 import { User } from '../interfaces/user';
+]import { RestApiService } from '../services/rest-api.service';
 
 @Component({
   selector: 'app-chat-room',
@@ -28,8 +29,10 @@ import { User } from '../interfaces/user';
 export class ChatRoomComponent {
   chatRoomService:ChatRoomService = inject(ChatRoomService);
   messageService:MessageService = inject(MessageService);
+  serverSentService:ServerSentService = inject(ServerSentService);
   chatRoom!:ChatRoom;
-  constructor(private route:ActivatedRoute, private sessionStorageService:SessionStorageService){
+  roomSubscription!: EventSource;
+  constructor(private route:ActivatedRoute, private sessionStorageService:SessionStorageService, private api:RestApiService){
     
   }
   
@@ -53,6 +56,12 @@ export class ChatRoomComponent {
         this.chatRoom.messages = messages
       }
     })
+    this.roomSubscription = this.serverSentService.createEventSource(this.api.getRootUrl(), this.chatRoom.uniqueId, this.sessionStorageService.getSessionUser()?.uniqueId);
+    if(this.roomSubscription.onmessage){
+      this.roomSubscription.onmessage = function(event){
+        console.log(event.data);
+      }
+    }
   }
   
   async submitMessage(chatInput:HTMLInputElement){

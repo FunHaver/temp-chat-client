@@ -16,7 +16,10 @@ export class RestApiService {
     this.apiUrl = `${this.rootUrl}/${this.apiBase}`
   }
 
-
+  getRootUrl(){
+    return this.rootUrl;
+  }
+  
   apiGet(endPoint: string, params?: object){
     let apiEndpoint: string = `${this.apiUrl}/${endPoint}`;
     let newParams = undefined;

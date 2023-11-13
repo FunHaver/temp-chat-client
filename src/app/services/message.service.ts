@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { RestApiService } from './rest-api.service';
 import { Message } from '../interfaces/message';
-import * as moment from 'moment';
+import * as dayjs from 'dayjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -30,7 +30,7 @@ export class MessageService {
         chatRoomId: chatRoom,
          // @ts-ignore 
         content: content,
-        creationTime: moment()
+        creationTime: dayjs()
       }
     }
   }
