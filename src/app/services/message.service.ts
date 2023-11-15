@@ -35,7 +35,7 @@ export class MessageService {
     }
   }
 
-  postMessage(message: Message){
-    return this.api.apiPost('message/new', message);
+  postMessage(message: Message, socket:WebSocket){
+      socket.send(JSON.stringify(message));
   }
 }
