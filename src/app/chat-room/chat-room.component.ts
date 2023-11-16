@@ -59,15 +59,15 @@ export class ChatRoomComponent {
     this.webSocket.onmessage = (event) => {
       let serverMessage = JSON.parse(event.data);
       if(Object.hasOwn(serverMessage, "USERLIST")){
-        console.log(serverMessage)
         this.chatRoom.users = serverMessage["USERLIST"];
+      } else if(Object.hasOwn(serverMessage, "CHAT")){
+        this.chatRoom.messages.push(serverMessage["CHAT"])
       }
     };
 
     const user = this.user;
     const webSocket = this.webSocket;
     this.webSocket.onopen = function(){
-      console.log("sending")
       webSocket.send(JSON.stringify({"ANNOUNCE": user}));
     }
 
@@ -76,6 +76,7 @@ export class ChatRoomComponent {
   
   async submitMessage(chatInput:HTMLInputElement){
     let outgoingMessage: Message = this.messageService.validateMessage(this.sessionStorageService.getSessionUser()?.uniqueId, this.sessionStorageService.getSessionRoom()?.uniqueId, chatInput.value);
+    outgoingMessage["user"] = this.user;
     this.messageService.postMessage(outgoingMessage, this.webSocket);
     
     chatInput.value = '';

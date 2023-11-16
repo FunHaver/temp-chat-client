@@ -36,6 +36,9 @@ export class MessageService {
   }
 
   postMessage(message: Message, socket:WebSocket){
-      socket.send(JSON.stringify(message));
+      const webSocketMessage = {
+        "MESSAGE": message
+      }
+      socket.send(JSON.stringify(webSocketMessage));
   }
 }
