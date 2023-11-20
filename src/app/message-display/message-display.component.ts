@@ -7,9 +7,11 @@ import { Message } from '../interfaces/message';
   standalone: true,
   imports: [CommonModule],
   template: `
-    <div *ngFor="let message of this.messages; index as i;">
-       <span>{{message.user?.username}} </span>
-       <span>{{message.content}}</span>
+    <div class="message-feed">
+     <div class="message" *ngFor="let message of this.messages; index as i;">
+       <span class="author">{{message.user?.username}}</span>
+       <span class="content">{{message.content}}</span>
+      </div>
     </div>
   `,
   styleUrls: ['./message-display.component.scss']

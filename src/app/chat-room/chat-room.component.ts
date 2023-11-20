@@ -10,18 +10,22 @@ import { MessageDisplayComponent } from '../message-display/message-display.comp
 import { UsersDisplayComponent } from '../users-display/users-display.component';
 import { User } from '../interfaces/user';
 import { RestApiService } from '../services/rest-api.service';
-
+import { HeaderComponent } from '../header/header.component';
 @Component({
   selector: 'app-chat-room',
   standalone: true,
-  imports: [CommonModule, MessageDisplayComponent, UsersDisplayComponent],
+  imports: [CommonModule, MessageDisplayComponent, UsersDisplayComponent, HeaderComponent],
   template: `
-    <app-message-display [messages]="this.chatRoom.messages"></app-message-display>
-    
- 
-    <input type="text" #chatInput>
-    <button type="button" (click)="submitMessage(chatInput)">Send</button>
-    <app-users-display [users]="this.chatRoom.users"></app-users-display>
+  <div class="chat-room-container">
+    <app-header class="chat-room-header-area"></app-header>
+    <app-message-display class="message-feed-area" [messages]="this.chatRoom.messages"></app-message-display>
+    <app-users-display [users]="this.chatRoom.users" class="users-list-area"></app-users-display>
+    <div class="chat-input-area">
+      <input class="message-input" type="text" #chatInput>
+      <button class="send-message" type="button" (click)="submitMessage(chatInput)">Send</button>
+    </div>
+  
+</div>
   `,
   styleUrls: ['./chat-room.component.scss']
 })

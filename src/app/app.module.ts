@@ -7,7 +7,7 @@ import { HomeComponent } from './home/home.component';
 import { RestApiService } from './services/rest-api.service';
 import { AppRoutingModule } from './app-routing.module';
 import { SessionStorageService } from './services/session-storage.service';
-import { ChatRoomComponent } from './chat-room/chat-room.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [

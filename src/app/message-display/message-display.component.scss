@@ -1,0 +1,15 @@
+.message-feed {
+    border: 1px solid black;
+    min-height: 200px;
+    height: calc(100vh - 120px);
+    margin-left: 5px;
+    overflow: scroll;
+    .message {
+        margin: 10px;
+
+        .author {
+            margin-right: 10px;
+            font-weight: bold;
+        }
+    }
+}

@@ -1,0 +1,40 @@
+.chat-room-container {
+    display: grid;
+    grid-template-columns: 2fr minmax(150px, 1fr);
+    grid-template-rows: auto;
+    grid-template-areas: 
+    "header header"
+    "message users"
+    "input .";
+    column-gap: 5px;
+    row-gap: 5px;
+    width: 100%;
+}
+
+.chat-room-header-area {
+    grid-area: header;
+}
+
+.message-feed-area {
+    grid-area: message;
+}
+
+.users-list-area {
+    grid-area: users;
+}
+
+.chat-input-area {
+    grid-area: input;
+    margin-left: 5px;
+    display: flex;
+    .message-input {
+        min-height: 44px;
+        font-size: 1.25em;
+        flex-grow: 2;
+    }
+
+    .send-message {
+        margin-left: 15px;
+        min-width: 44px;
+    }
+}

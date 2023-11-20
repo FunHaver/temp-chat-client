@@ -7,10 +7,14 @@ import { User } from '../interfaces/user';
   standalone: true,
   imports: [CommonModule],
   template: `
-    <p>Users</p>
-    <div *ngFor="let user of this.users; index as i;">
-      {{user.username}}
-    </div>
+  <div class="users-list">
+    <h2>Users</h2>
+    <ul>
+      <li *ngFor="let user of this.users; index as i;">
+        {{user.username}}
+      </li>
+    </ul>
+  </div>
   `,
   styleUrls: ['./users-display.component.scss']
 })
