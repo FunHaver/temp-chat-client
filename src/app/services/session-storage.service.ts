@@ -9,7 +9,7 @@ export class SessionStorageService {
 
   constructor() { }
 
-  setSessionUser(user:User){
+  setSessionUser(user:User | null){
     sessionStorage.setItem("user", JSON.stringify(user));
   }
 
@@ -22,7 +22,7 @@ export class SessionStorageService {
     }
   }
 
-  setSessionRoom(chatRoom: ChatRoom){
+  setSessionRoom(chatRoom: ChatRoom | null){
     sessionStorage.setItem("chatRoom", JSON.stringify(chatRoom));
   }
 

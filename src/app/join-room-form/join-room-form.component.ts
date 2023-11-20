@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ChatRoomService } from '../services/chat-room.service';
@@ -20,10 +20,19 @@ import { ChatRoomService } from '../services/chat-room.service';
   styleUrls: ['./join-room-form.component.scss']
 })
 export class JoinRoomFormComponent {
+  @Input() roomId: string | undefined = '';
   joinRoomForm = new FormGroup({
     username: new FormControl(''),
-    chatRoomId: new FormControl(''),
+    chatRoomId: new FormControl(this.roomId),
     generateRoom: new FormControl(false)
   })
+
+  ngOnInit(){
+    this.joinRoomForm.setValue({
+      username: '',
+      chatRoomId: this.roomId,
+      generateRoom: false
+    })
+  }
   chatRoomService:ChatRoomService = inject(ChatRoomService);
 }

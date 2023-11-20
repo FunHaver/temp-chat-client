@@ -2,30 +2,31 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ChatRoomService } from '../services/chat-room.service';
 import { MessageService } from '../services/message.service';
-import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { Message } from '../interfaces/message';
 import { SessionStorageService } from '../services/session-storage.service';
 import { ChatRoom } from '../interfaces/chat-room';
 import { MessageDisplayComponent } from '../message-display/message-display.component';
 import { UsersDisplayComponent } from '../users-display/users-display.component';
 import { User } from '../interfaces/user';
-import { RestApiService } from '../services/rest-api.service';
 import { HeaderComponent } from '../header/header.component';
+import { BadRoomComponent } from '../bad-room/bad-room.component';
 @Component({
   selector: 'app-chat-room',
   standalone: true,
-  imports: [CommonModule, MessageDisplayComponent, UsersDisplayComponent, HeaderComponent],
+  imports: [CommonModule, MessageDisplayComponent, UsersDisplayComponent, HeaderComponent, BadRoomComponent],
   template: `
-  <div class="chat-room-container">
+  <div *ngIf="!badRoom" class="chat-room-container">
     <app-header class="chat-room-header-area"></app-header>
     <app-message-display class="message-feed-area" [messages]="this.chatRoom.messages"></app-message-display>
     <app-users-display [users]="this.chatRoom.users" class="users-list-area"></app-users-display>
     <div class="chat-input-area">
-      <input class="message-input" type="text" #chatInput>
-      <button class="send-message" type="button" (click)="submitMessage(chatInput)">Send</button>
+      <input class="message-input" type="text" #chatInput (keydown.enter)="submitMessage(chatInput)">
+      <button class="send-message" type="button" (keydown.enter)="submitMessage(chatInput)" (click)="submitMessage(chatInput)" >Send</button>
     </div>
   
-</div>
+  </div>
+  <app-bad-room *ngIf="badRoom"></app-bad-room>
   `,
   styleUrls: ['./chat-room.component.scss']
 })
@@ -37,14 +38,20 @@ export class ChatRoomComponent {
   user!:User;
   webSocket!:WebSocket;
 
-  constructor(private route:ActivatedRoute, private sessionStorageService:SessionStorageService, private api:RestApiService){
-    
+  badRoom:boolean;
+  constructor(private sessionStorageService:SessionStorageService, private router: Router){
+    this.badRoom = false;
   }
   
   ngOnInit(){
     this.chatRoom = this.sessionStorageService.getSessionRoom() as ChatRoom;
     this.user = this.sessionStorageService.getSessionUser() as User;
     
+    if(this.chatRoom === null || this.user === null){
+      this.badRoom = true;
+      return;
+    }
+
     this.chatRoomService.getUsers(this.chatRoom.uniqueId).subscribe(result => {
       const users = result.body as Array<User>;
       if(users){
@@ -65,7 +72,7 @@ export class ChatRoomComponent {
       if(Object.hasOwn(serverMessage, "USERLIST")){
         this.chatRoom.users = serverMessage["USERLIST"];
       } else if(Object.hasOwn(serverMessage, "CHAT")){
-        this.chatRoom.messages.push(serverMessage["CHAT"])
+        this.chatRoom.messages.push(serverMessage["CHAT"]);
       }
     };
 
@@ -79,10 +86,11 @@ export class ChatRoomComponent {
   }
   
   async submitMessage(chatInput:HTMLInputElement){
-    let outgoingMessage: Message = this.messageService.validateMessage(this.sessionStorageService.getSessionUser()?.uniqueId, this.sessionStorageService.getSessionRoom()?.uniqueId, chatInput.value);
-    outgoingMessage["user"] = this.user;
-    this.messageService.postMessage(outgoingMessage, this.webSocket);
-    
-    chatInput.value = '';
+    if(chatInput.value.length && chatInput.value.length > 0){
+      let outgoingMessage: Message = this.messageService.validateMessage(this.sessionStorageService.getSessionUser()?.uniqueId, this.sessionStorageService.getSessionRoom()?.uniqueId, chatInput.value);
+      outgoingMessage["user"] = this.user;
+      this.messageService.postMessage(outgoingMessage, this.webSocket);
+      chatInput.value = '';
+    }
   }
 }
