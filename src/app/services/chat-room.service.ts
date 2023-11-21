@@ -35,11 +35,7 @@ export class ChatRoomService {
 
   joinRoom(loginForm: object) {
     const loginRequest = this.api.apiPost('auth/login', loginForm);
-    loginRequest.subscribe(resp => {
-      if(resp.body){
-        this.navigateToRoom(resp.body);
-      }
-    })
+    return loginRequest;
   }
 
   getChatRoom(id: string) {

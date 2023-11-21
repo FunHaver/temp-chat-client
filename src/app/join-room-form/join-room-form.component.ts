@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { Component, Input, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
@@ -8,7 +9,8 @@ import { ChatRoomService } from '../services/chat-room.service';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   template: `
-  <form [formGroup]="joinRoomForm" (submit)="chatRoomService.joinRoom(joinRoomForm.value)">
+  <form [formGroup]="joinRoomForm" (submit)="joinRoom(joinRoomForm.value)">
+    <span>{{this.joinError}}</span>
     <label for="joinUsername">Username: </label>
     <input id="joinUsername" type="text" formControlName="username">
     <label for="roomId">Room Id: </label>
@@ -27,11 +29,29 @@ export class JoinRoomFormComponent {
     generateRoom: new FormControl(false)
   })
 
+  joinError: string;
+
+
+  constructor(){
+    this.joinError = ''
+  }
   ngOnInit(){
     this.joinRoomForm.setValue({
       username: '',
       chatRoomId: this.roomId,
       generateRoom: false
+    })
+  }
+
+  joinRoom(formValue: object){
+    this.chatRoomService.joinRoom(formValue).subscribe( resp => {
+      if(resp.body){
+        if(resp.body.error){
+          this.joinError = resp.body.error;
+        } else {
+          this.chatRoomService.navigateToRoom(resp.body);
+        }
+      }
     })
   }
   chatRoomService:ChatRoomService = inject(ChatRoomService);

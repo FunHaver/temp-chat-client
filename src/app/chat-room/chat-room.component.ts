@@ -56,6 +56,8 @@ export class ChatRoomComponent {
       const users = result.body as Array<User>;
       if(users){
         this.chatRoom.users = users;
+      } else {
+        this.badRoom = true;
       }
     })
     this.chatRoomService.getMessages(this.chatRoom.uniqueId).subscribe(result => {
