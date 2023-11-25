@@ -17,7 +17,7 @@ import { BadRoomComponent } from '../bad-room/bad-room.component';
   imports: [CommonModule, MessageDisplayComponent, UsersDisplayComponent, HeaderComponent, BadRoomComponent],
   template: `
   <div *ngIf="!badRoom" class="chat-room-container">
-    <app-header class="chat-room-header-area"></app-header>
+    <app-header class="chat-room-header-area" [users]="this.chatRoom.users"></app-header>
     <app-message-display class="message-feed-area" [messages]="this.chatRoom.messages"></app-message-display>
     <app-users-display [users]="this.chatRoom.users" class="users-list-area"></app-users-display>
     <div class="chat-input-area">

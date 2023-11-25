@@ -1,9 +1,24 @@
 header{
-    display: flex;
     justify-content: space-between;
     border-bottom: 1px solid black;
 }
+.full-width-header {
+    display:flex;
+}
+.mobile-width-header {
+    display:none;
+}
 
-.room-control {
+.header-button {
     margin: 5px;
+}
+
+@media (max-width: 600px) {
+    .full-width-header {
+        display: none;
+    }
+
+    .mobile-width-header {
+        display: flex;
+    }
 }

@@ -1,21 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from "@angular/router";
 import { SessionStorageService } from '../services/session-storage.service';
+import { User } from '../interfaces/user';
 @Component({
   selector: 'app-header',
   standalone: true,
   imports: [CommonModule],
   template: `
-    <header>
-      <button (keydown.enter)="copyRoomLink()" (click)="leaveRoom()" class="room-control">Leave Room</button>
-      <button (keydown.enter)="copyRoomLink()" (click)="copyRoomLink()" class="room-control">{{copyLinkMessage}}</button>
+    <header class="full-width-header">
+      <button (keydown.enter)="copyRoomLink()" (click)="leaveRoom()" class="header-button">Leave Room</button>
+      <button (keydown.enter)="copyRoomLink()" (click)="copyRoomLink()" class="header-button">{{copyLinkMessage}}</button>
+    </header>
+    <header class="mobile-width-header">
+      <button (keydown.enter)="showRoomControls()" (click)="showRoomControls()" class="header-button">Menu</button>
+      <button (keydown.enter)="showUsers()" (click)="showUsers()" class="header-button">Users</button>
     </header>
   `,
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
-
+  @Input() users!:Array<User>
   copyLinkMessage: string;
   constructor(private router: Router, private sessionStorageService: SessionStorageService){
     this.copyLinkMessage = 'Copy Room Link';
@@ -35,5 +40,13 @@ export class HeaderComponent {
     this.router.navigateByUrl("/");
     this.sessionStorageService.setSessionRoom(null);
     this.sessionStorageService.setSessionUser(null);
+  }
+
+  showRoomControls(){
+    
+  }
+
+  showUsers(){
+
   }
 }

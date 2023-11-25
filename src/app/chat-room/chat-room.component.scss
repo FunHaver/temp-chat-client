@@ -38,3 +38,23 @@
         min-width: 44px;
     }
 }
+
+@media (max-width: 600px) {
+    .chat-room-container{
+        grid-template-columns: 1fr;
+        grid-template-areas: 
+        "header"
+        "message"
+        "input";
+        width: 100%;
+    }
+
+    .users-list-area {
+        grid-area: none;
+        display: none;
+    }
+
+    .send-message {
+        margin-right: 5px;
+    }
+}
