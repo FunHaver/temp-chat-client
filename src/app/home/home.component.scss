@@ -1,34 +1,35 @@
 .home-page-container {
     display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: minmax(75px, 1fr) 1fr minmax(45px, 1fr);
+    grid-template-columns: auto;
+    grid-template-rows:  min-content 1fr;
+    grid-template-areas: "info"
+                          "form";
     width: 100%;
-    height: 50vh;
+    height: 100vh;
     min-height: 300px;
 }
 
-.app-title {
-    grid-column-start: 1;
-    grid-column-end: 1;
-    grid-row-start: 1;
-    grid-row-end: 1;
-    text-align: center;
-    align-self: end;
+.app-info {
+    grid-area: info;
+    width: 90%;
+    justify-self: center;
+
+    .app-title {
+        color: var(--major-blue);
+    }
 }
 
-.sign-in-form {
-    grid-column-start: 1;
-    grid-column-end: 1;
-    grid-row-start: 2;
-    grid-row-end: 2;
+.app-form {
+    grid-area: form;
+    width: 40%;
+    min-width: 150px;
+    align-self: start;
     justify-self: center;
-    align-self: center;
-    width: 50%;
-    min-width: 200px;
 }
 
 .toggle-form-button {
-    justify-self: center;
-    align-self: flex-end;
     height: 44px;
+    margin: 5px auto;
+    display: inherit;
+    
 }

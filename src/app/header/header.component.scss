@@ -1,6 +1,6 @@
 header{
     justify-content: space-between;
-    border-bottom: 1px solid black;
+    border-bottom: 2px solid black;
 }
 .full-width-header {
     display:flex;
@@ -12,6 +12,36 @@ header{
 .header-button {
     margin: 5px;
 }
+
+.mobile-button {
+    border: 3px solid black;
+}
+
+.leave-button {
+    background-color: var(--stop-red);
+    color: white;
+}
+
+.share-button {
+    background-color: var(--neutral-grey);
+    border: 2px solid black;
+}
+
+.svg-icon {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .svg-icon path,
+  .svg-icon polygon,
+  .svg-icon rect {
+    fill: black;
+  }
+  
+  .svg-icon circle {
+    stroke: black;
+    stroke-width: 1;
+  }
 
 @media (max-width: 600px) {
     .full-width-header {

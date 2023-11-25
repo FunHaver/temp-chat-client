@@ -16,7 +16,7 @@ import { ChatRoomService } from '../services/chat-room.service';
     <label for="roomId">Room Id: </label>
     <input id="roomId" type="text" formControlName="chatRoomId">
 
-    <button type="submit">Join Room</button>
+    <button class="major-button" type="submit">Join Room</button>
 </form>
   `,
   styleUrls: ['./join-room-form.component.scss']

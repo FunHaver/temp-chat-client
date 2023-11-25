@@ -7,19 +7,28 @@
     font-family:Arial, Helvetica, sans-serif;
 }
 
+:root {
+    --major-blue: #524eb7;
+    --stop-red: #E84855;
+    --neutral-grey: #F3F7F6;
+    --dark-grey: #78A59A;
+}
+
 body{
     margin: 0px;
+    background-color: var(--neutral-grey);
 }
 
 form {
     display: flex;
     flex-direction: column;
     label {
-        font-size: 1rem;
+        font-size: 1.1rem;
     }
 
     input {
         margin: 5px 0px;
+        font-size: 1rem;
     }
 }
 
@@ -27,4 +36,22 @@ button {
     min-width: 44px;
     min-height: 44px;
     font-size: 1rem;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+
+    &:hover {
+        filter: brightness(90%);
+    }
+}
+
+.major-button {
+    background-color: var(--major-blue);
+    color: white;
+}
+
+.minor-button {
+    border: 2px solid var(--major-blue);
+    color: var(--major-blue);
+    background-color: white;
 }

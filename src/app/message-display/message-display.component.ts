@@ -7,6 +7,7 @@ import { Message } from '../interfaces/message';
   standalone: true,
   imports: [CommonModule],
   template: `
+    <h2 class="room-name">Chat Room: {{roomName ? roomName : "Chat Room"}}</h2>
     <div class="message-feed" #messageWindow>
      <div class="message" *ngFor="let message of this.messages; index as i;">
        <span class="author">{{message.user?.username}}</span>
@@ -18,6 +19,8 @@ import { Message } from '../interfaces/message';
 })
 export class MessageDisplayComponent {
   @Input() messages!:Array<Message>
+  @Input() roomName!:string;
+
   @ViewChild("messageWindow", {static: false}) messageWindowRef: ElementRef<HTMLDivElement> | undefined;
   oldMessageLength: number = 0;
   constructor(){}

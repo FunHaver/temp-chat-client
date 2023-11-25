@@ -17,6 +17,7 @@
 
 .message-feed-area {
     grid-area: message;
+    height: calc(100vh - 140px);
 }
 
 .users-list-area {
@@ -31,11 +32,14 @@
         min-height: 44px;
         font-size: 1.25em;
         flex-grow: 2;
+        border: 2px solid black;
     }
 
     .send-message {
         margin-left: 15px;
         min-width: 44px;
+        background-color: var(--major-blue);
+        color: white;
     }
 }
 
