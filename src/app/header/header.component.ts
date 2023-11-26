@@ -3,11 +3,11 @@ import { CommonModule } from '@angular/common';
 import { Router } from "@angular/router";
 import { SessionStorageService } from '../services/session-storage.service';
 import { User } from '../interfaces/user';
+import { MobileRoomControlsComponent } from '../mobile-room-controls/mobile-room-controls.component';
 @Component({
-  selector: 'app-header',
-  standalone: true,
-  imports: [CommonModule],
-  template: `
+    selector: 'app-header',
+    standalone: true,
+    template: `
     <header class="full-width-header">
       <button (keydown.enter)="copyRoomLink()" (click)="leaveRoom()" class="header-button leave-button">Leave Room</button>
       <button (keydown.enter)="copyRoomLink()" (click)="copyRoomLink()" class="header-button share-button">{{copyLinkMessage}}</button>
@@ -27,14 +27,18 @@ import { User } from '../interfaces/user';
 			</svg>
       </button>
     </header>
+    <app-mobile-room-controls *ngIf="roomControlsVisible" [visibilityBool]="roomControlsVisible" (roomVisChange)="roomControlsVisible=$event"></app-mobile-room-controls>
   `,
-  styleUrls: ['./header.component.scss']
+    styleUrls: ['./header.component.scss'],
+    imports: [CommonModule, MobileRoomControlsComponent]
 })
 export class HeaderComponent {
   @Input() users!:Array<User>
   copyLinkMessage: string;
+  roomControlsVisible: boolean;
   constructor(private router: Router, private sessionStorageService: SessionStorageService){
     this.copyLinkMessage = 'Copy Room Link';
+    this.roomControlsVisible = false;
   }
 
   copyRoomLink(){
@@ -54,10 +58,10 @@ export class HeaderComponent {
   }
 
   showRoomControls(){
-    
+    this.roomControlsVisible = !this.roomControlsVisible;
   }
 
   showUsers(){
-
+    
   }
 }

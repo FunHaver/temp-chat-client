@@ -1,6 +1,6 @@
 .message-feed {
     min-height: 200px;
-    height: 100%;
+    height: calc(100vh - 200px);
     margin-left: 5px;
     overflow: scroll;
     background-color: white;
