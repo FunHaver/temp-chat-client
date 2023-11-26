@@ -19,7 +19,10 @@ import { BadRoomComponent } from '../bad-room/bad-room.component';
   <div *ngIf="!badRoom" class="chat-room-container">
     <app-header class="chat-room-header-area" [users]="this.chatRoom.users"></app-header>
     <app-message-display class="message-feed-area" [roomName]="this.chatRoom.name" [messages]="this.chatRoom.messages"></app-message-display>
-    <app-users-display [users]="this.chatRoom.users" class="users-list-area"></app-users-display>
+    <div class="users-list-area">
+      <h2>Users List</h2>
+    <app-users-display [users]="this.chatRoom.users"></app-users-display>
+    </div>
     <div class="chat-input-area">
       <input class="message-input" type="text" #chatInput (keydown.enter)="submitMessage(chatInput)">
       <button class="send-message" type="button" (keydown.enter)="submitMessage(chatInput)" (click)="submitMessage(chatInput)" >Send</button>

@@ -8,7 +8,6 @@ import { User } from '../interfaces/user';
   imports: [CommonModule],
   template: `
   <div class="users-list">
-    <h2>Users</h2>
     <ul>
       <li *ngFor="let user of this.users; index as i;">
         {{user.username}}

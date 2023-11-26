@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { Router } from "@angular/router";
 import { SessionStorageService } from '../services/session-storage.service';
 import { User } from '../interfaces/user';
-import { MobileRoomControlsComponent } from '../mobile-room-controls/mobile-room-controls.component';
+import { UsersDisplayComponent } from '../users-display/users-display.component';
+import { MobileRoomControlsComponent } from '../modal/modal.component';
 @Component({
     selector: 'app-header',
     standalone: true,
@@ -27,18 +28,28 @@ import { MobileRoomControlsComponent } from '../mobile-room-controls/mobile-room
 			</svg>
       </button>
     </header>
-    <app-mobile-room-controls *ngIf="roomControlsVisible" [visibilityBool]="roomControlsVisible" (roomVisChange)="roomControlsVisible=$event"></app-mobile-room-controls>
+    <app-modal *ngIf="roomControlsVisible" [visibilityBool]="roomControlsVisible" (modalVisChange)="roomControlsVisible=$event" [headerTitle]="'Options'">
+        <div class="room-controls-modal">
+          <button (click)="leaveRoom()" class="leave-button">Leave Room</button>
+          <button (click)="copyRoomLink()" class="share-button">{{copyLinkMessage}}</button>
+        </div>
+    </app-modal>
+    <app-modal *ngIf="userListVisible" [visibilityBool]="userListVisible" (modalVisChange)="userListVisible=$event" [headerTitle]="'Users List'"> 
+        <app-users-display class="users-list-modal" [users]="this.users"></app-users-display>
+    </app-modal>
   `,
     styleUrls: ['./header.component.scss'],
-    imports: [CommonModule, MobileRoomControlsComponent]
+    imports: [CommonModule, MobileRoomControlsComponent, UsersDisplayComponent]
 })
 export class HeaderComponent {
   @Input() users!:Array<User>
   copyLinkMessage: string;
   roomControlsVisible: boolean;
+  userListVisible: boolean;
   constructor(private router: Router, private sessionStorageService: SessionStorageService){
     this.copyLinkMessage = 'Copy Room Link';
     this.roomControlsVisible = false;
+    this.userListVisible = false;
   }
 
   copyRoomLink(){
@@ -62,6 +73,6 @@ export class HeaderComponent {
   }
 
   showUsers(){
-    
+    this.userListVisible = !this.userListVisible;
   }
 }

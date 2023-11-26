@@ -16,18 +16,32 @@ header{
 .svg-icon {
     width: 40px;
     height: 40px;
-  }
+}
   
-  .svg-icon path,
-  .svg-icon polygon,
-  .svg-icon rect {
+.svg-icon path,
+.svg-icon polygon,
+.svg-icon rect {
     fill: black;
-  }
+}
   
-  .svg-icon circle {
+.svg-icon circle {
     stroke: black;
     stroke-width: 1;
-  }
+}
+
+.room-controls-modal {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 100px;
+}
+
+.users-list-modal {
+    display: block;
+    min-height: 100px;
+    height: 50vh;
+    overflow: scroll;
+}
 
 @media (max-width: 600px) {
     .full-width-header {
