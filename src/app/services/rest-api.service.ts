@@ -7,7 +7,7 @@ import { catchError, throwError } from 'rxjs';
 })
 export class RestApiService {
 
-  private rootUrl: string = 'http://localhost:3000';
+  private rootUrl: string = window.location.origin;
   private apiBase = 'api';
   private apiUrl = ''; 
 
