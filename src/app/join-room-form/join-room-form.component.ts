@@ -44,15 +44,26 @@ export class JoinRoomFormComponent {
   }
 
   joinRoom(formValue: object){
+    if(typeof formValue.username === "string" && formValue.username.length > 0){
+
+    
     this.chatRoomService.joinRoom(formValue).subscribe( resp => {
       if(resp.body){
         if(resp.body.error){
           this.joinError = resp.body.error;
+          
         } else {
           this.chatRoomService.navigateToRoom(resp.body);
         }
       }
+    }, err => {
+      if(err === "404"){
+        this.joinError = "Room not found";
+      }
     })
+  } else {
+    this.joinError = "Username must be at least one character long"
+  }
   }
   chatRoomService:ChatRoomService = inject(ChatRoomService);
 }

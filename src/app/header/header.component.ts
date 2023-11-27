@@ -43,6 +43,8 @@ import { MobileRoomControlsComponent } from '../modal/modal.component';
 })
 export class HeaderComponent {
   @Input() users!:Array<User>
+  @Input() webSocket!: WebSocket;
+
   copyLinkMessage: string;
   roomControlsVisible: boolean;
   userListVisible: boolean;
@@ -66,6 +68,7 @@ export class HeaderComponent {
     this.router.navigateByUrl("/");
     this.sessionStorageService.setSessionRoom(null);
     this.sessionStorageService.setSessionUser(null);
+    this.webSocket.close();
   }
 
   showRoomControls(){

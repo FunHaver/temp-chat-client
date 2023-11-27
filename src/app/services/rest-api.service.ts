@@ -44,14 +44,16 @@ export class RestApiService {
   }
 
   handleError(error: HttpErrorResponse){
-    if(error.status === 0){
-      console.error('Request Error: ', error.error);
-    } else {
-      console.error(`Server returned code ${error.status}. Error message: `, error.error)
-    }
+
 
     return throwError(()=>{
-      return new Error('Error with API Request.')
+      if(error.status === 0){
+        throw ('Request Error');
+      } else if (error.status === 404) {
+        throw ("404");
+      } else {
+        throw ('Error with API Request.')
+      }
     });
   }
 
