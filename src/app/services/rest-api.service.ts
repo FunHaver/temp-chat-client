@@ -12,7 +12,7 @@ export class RestApiService {
   private apiUrl = ''; 
 
   constructor(private http: HttpClient) { 
-    this.rootUrl = this.rootUrl.length > 0 ? this.rootUrl : window.location.origin;
+    this.rootUrl = this.rootUrl.includes('localhost') ? "http://localhost:3000" : window.location.origin;
     this.apiUrl = `${this.rootUrl}/${this.apiBase}`
   }
 
@@ -48,6 +48,7 @@ export class RestApiService {
 
     return throwError(()=>{
       if(error.status === 0){
+        console.error(error);
         throw ('Request Error');
       } else if (error.status === 404) {
         throw ("404");
