@@ -73,7 +73,7 @@ export class ChatRoomComponent {
     })
 
 
-    this.webSocket = new WebSocket(`ws://${this.webSocketUrl}:3001`);
+    this.webSocket = new WebSocket(`ws://${this.webSocketUrl}/ws`);
     this.webSocket.onmessage = (event) => {
       let serverMessage = JSON.parse(event.data);
       if(Object.hasOwn(serverMessage, "USERLIST")){
