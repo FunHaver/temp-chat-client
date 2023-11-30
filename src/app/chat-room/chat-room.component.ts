@@ -45,7 +45,7 @@ export class ChatRoomComponent {
   webSocketUrl: string;
   constructor(private sessionStorageService:SessionStorageService, private router: Router){
     this.badRoom = false;
-    this.webSocketUrl = window.location.host.includes("localhost") ? "localhost" : window.location.host;
+    this.webSocketUrl = window.location.host.includes("localhost") ? "ws://localhost:3001" : `ws://${window.location.host}/ws`;
   }
   
   ngOnInit(){
@@ -73,7 +73,7 @@ export class ChatRoomComponent {
     })
 
 
-    this.webSocket = new WebSocket(`ws://${this.webSocketUrl}/ws`);
+    this.webSocket = new WebSocket(this.webSocketUrl);
     this.webSocket.onmessage = (event) => {
       let serverMessage = JSON.parse(event.data);
       if(Object.hasOwn(serverMessage, "USERLIST")){
