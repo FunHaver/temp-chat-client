@@ -7,11 +7,15 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule],
   template: `
     <p>
-      page-not-found works!
+      404!
+    </p>
+    <p>
+      <a href="{{this.homeUrl}}">Back to Home</a>
     </p>
   `,
   styleUrls: ['./page-not-found.component.scss']
 })
 export class PageNotFoundComponent {
+  homeUrl: string = window.location.hostname;
 
 }
