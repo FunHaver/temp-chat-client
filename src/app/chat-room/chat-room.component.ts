@@ -46,9 +46,9 @@ export class ChatRoomComponent {
   constructor(private sessionStorageService:SessionStorageService, private router: Router){
     this.badRoom = false;
     if(window.location.protocol.includes("https")){
-      this.webSocketUrl = window.location.host.includes("localhost") ? "wss://localhost:3001" : `https://${window.location.host}/ws`;
+      this.webSocketUrl = window.location.host.includes("localhost") ? "wss://localhost:3001" : `wss://${window.location.host}/ws`;
     } else {
-      this.webSocketUrl = window.location.host.includes("localhost") ? "ws://localhost:3001" : `http://${window.location.host}/ws`;
+      this.webSocketUrl = window.location.host.includes("localhost") ? "ws://localhost:3001" : `ws://${window.location.host}/ws`;
     }
     console.log(this.webSocketUrl);
   }
