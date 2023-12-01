@@ -27,6 +27,12 @@
     justify-self: center;
 }
 
+@media (max-width: 600px){
+    .app-form {
+        width: 75%;
+    }
+}
+
 .toggle-form-button {
     height: 44px;
     margin: 5px auto;

@@ -7,8 +7,10 @@ import { ActivatedRoute } from '@angular/router';
   standalone: true,
   imports: [CommonModule, JoinRoomFormComponent],
   template: `
+  <div class="join-room-standalone">
     <h1>Join a room!</h1>
     <app-join-room-form [roomId]="this.roomId"></app-join-room-form>
+</div>
   `,
   styleUrls: ['./join-room.component.scss']
 })

@@ -22,5 +22,6 @@
 @media (max-width: 600px) {
     .message-feed {
         margin-right: 5px;
+        height: calc(85vh - 200px);
     }
 }
