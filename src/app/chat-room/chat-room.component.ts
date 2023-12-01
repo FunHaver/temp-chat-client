@@ -45,7 +45,7 @@ export class ChatRoomComponent {
   webSocketUrl: string;
   constructor(private sessionStorageService:SessionStorageService, private router: Router){
     this.badRoom = false;
-    this.webSocketUrl = window.location.host.includes("localhost") ? "ws://localhost:3001" : `ws://${window.location.host}/ws`;
+    this.webSocketUrl = window.location.host.includes("localhost") ? "ws://localhost:3001" : `http://${window.location.host}/ws`;
   }
   
   ngOnInit(){
