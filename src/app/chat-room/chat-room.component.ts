@@ -50,6 +50,7 @@ export class ChatRoomComponent {
     } else {
       this.webSocketUrl = window.location.host.includes("localhost") ? "ws://localhost:3001" : `http://${window.location.host}/ws`;
     }
+    console.log(this.webSocketUrl);
   }
   
   ngOnInit(){
