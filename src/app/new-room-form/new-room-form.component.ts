@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
 import { ChatRoomService } from '../services/chat-room.service';
 import { FormValue } from '../interfaces/form-value';
-
+import { SessionStorageService } from '../services/session-storage.service';
 @Component({
   selector: 'app-new-room-form',
   standalone: true,
@@ -25,9 +25,11 @@ export class NewRoomFormComponent {
   })
   chatRoomService:ChatRoomService = inject(ChatRoomService);
 
+  constructor(private sessionStorageService: SessionStorageService){}
    
   createRoom(formValue: FormValue){
     if(typeof formValue.username === "string" && formValue.username.length > 0){
+      this.sessionStorageService.removeSessionStorage();
       this.chatRoomService.generateRoom(formValue);
     }
   }

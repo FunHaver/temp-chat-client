@@ -9,6 +9,9 @@ export class SessionStorageService {
 
   constructor() { }
 
+  removeSessionStorage(){
+    sessionStorage.clear();
+  }
   setSessionUser(user:User | null){
     sessionStorage.setItem("user", JSON.stringify(user));
   }

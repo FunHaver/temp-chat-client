@@ -3,7 +3,7 @@ import { Component, Input, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ChatRoomService } from '../services/chat-room.service';
-
+import { SessionStorageService } from '../services/session-storage.service';
 @Component({
   selector: 'app-join-room-form',
   standalone: true,
@@ -32,7 +32,7 @@ export class JoinRoomFormComponent {
   joinError: string;
 
 
-  constructor(){
+  constructor(private sessionStorageService: SessionStorageService){
     this.joinError = ''
   }
   ngOnInit(){
@@ -53,6 +53,7 @@ export class JoinRoomFormComponent {
           this.joinError = resp.body.error;
           
         } else {
+          this.sessionStorageService.removeSessionStorage();
           this.chatRoomService.navigateToRoom(resp.body);
         }
       }
