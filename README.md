@@ -1,8 +1,10 @@
 # TempChat Client
-The client code for the Temp Chat application.
+The client code for the Temp Chat application. Deployment instructions [here](https://github.com/FunHaver/temp-chat-deploy).
 
 ## Angular CLI information
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.6.
+
+This application runs alongside it's back-end counterpart [found here](https://github.com/FunHaver/temp-chat-server)
 
 ### Development server
 
