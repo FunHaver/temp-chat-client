@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
       404!
     </p>
     <p>
-      <a href="{{this.homeUrl}}">Back to Home</a>
+      <a href="/">Back to Home</a>
     </p>
   `,
   styleUrls: ['./page-not-found.component.scss']
