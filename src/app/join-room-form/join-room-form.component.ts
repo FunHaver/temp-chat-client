@@ -1,5 +1,5 @@
 //@ts-nocheck
-import { Component, Input, inject } from '@angular/core';
+import { Component, Input, inject, ChangeDetectionStrategy } from '@angular/core';
 
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ChatRoomService } from '../services/chat-room.service';
@@ -18,6 +18,7 @@ import { SessionStorageService } from '../services/session-storage.service';
     <button class="major-button" type="submit">Join Room</button>
 </form>
   `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrls: ['./join-room-form.component.scss']
 })
 export class JoinRoomFormComponent {

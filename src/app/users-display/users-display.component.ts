@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
 import { User } from '../interfaces/user';
 
@@ -16,6 +16,7 @@ import { User } from '../interfaces/user';
     </ul>
   </div>
   `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrls: ['./users-display.component.scss']
 })
 export class UsersDisplayComponent {

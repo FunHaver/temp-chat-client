@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 
 import { NewRoomFormComponent } from '../new-room-form/new-room-form.component';
 import { RestApiService } from '../services/rest-api.service';
@@ -29,6 +29,7 @@ import { JoinRoomFormComponent } from '../join-room-form/join-room-form.componen
     </div>
   </div>
   `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {

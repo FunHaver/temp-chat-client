@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 
 @Component({
@@ -12,6 +12,7 @@ import { Component } from '@angular/core';
       <a href="/">Back to Home</a>
     </p>
   `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrls: ['./page-not-found.component.scss']
 })
 export class PageNotFoundComponent {

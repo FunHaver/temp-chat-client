@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 
 import { ChatRoomService } from '../services/chat-room.service';
 import { MessageService } from '../services/message.service';
@@ -33,6 +33,7 @@ import { BadRoomComponent } from '../bad-room/bad-room.component';
     <app-bad-room></app-bad-room>
   }
   `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrls: ['./chat-room.component.scss']
 })
 

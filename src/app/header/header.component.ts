@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
 import { Router } from "@angular/router";
 import { SessionStorageService } from '../services/session-storage.service';
@@ -42,6 +42,7 @@ import { MobileRoomControlsComponent } from '../modal/modal.component';
     }
     `,
     styleUrls: ['./header.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [MobileRoomControlsComponent, UsersDisplayComponent]
 })
 export class HeaderComponent {

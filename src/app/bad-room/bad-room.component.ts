@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 
 @Component({
@@ -9,6 +9,7 @@ import { Component } from '@angular/core';
     <span>Error! You have either left the room or it no longer exists</span>
 </div>
   `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrls: ['./bad-room.component.scss']
 })
 export class BadRoomComponent {

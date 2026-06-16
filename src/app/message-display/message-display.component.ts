@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 
 import { Message } from '../interfaces/message';
 
@@ -16,6 +16,7 @@ import { Message } from '../interfaces/message';
       }
     </div>
     `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrls: ['./message-display.component.scss']
 })
 export class MessageDisplayComponent {

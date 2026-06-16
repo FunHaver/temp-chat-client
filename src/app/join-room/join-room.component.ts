@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 import { JoinRoomFormComponent } from '../join-room-form/join-room-form.component';
 import { ActivatedRoute } from '@angular/router';
@@ -11,6 +11,7 @@ import { ActivatedRoute } from '@angular/router';
     <app-join-room-form [roomId]="this.roomId"></app-join-room-form>
 </div>
   `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrls: ['./join-room.component.scss']
 })
 export class JoinRoomComponent {

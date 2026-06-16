@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi, withXhr } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { RestApiService } from './services/rest-api.service';
@@ -15,5 +15,5 @@ import { HeaderComponent } from './header/header.component';
     bootstrap: [AppComponent], imports: [BrowserModule,
         HomeComponent,
         ReactiveFormsModule,
-        AppRoutingModule], providers: [RestApiService, SessionStorageService, provideHttpClient(withInterceptorsFromDi())] })
+        AppRoutingModule], providers: [RestApiService, SessionStorageService, provideHttpClient(withXhr(), withInterceptorsFromDi())] })
 export class AppModule { }
