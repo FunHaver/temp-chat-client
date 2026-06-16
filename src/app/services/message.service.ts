@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { RestApiService } from './rest-api.service';
 import { Message } from '../interfaces/message';
-import * as dayjs from 'dayjs';
+import dayjs from 'dayjs';
 @Injectable({
   providedIn: 'root'
 })
