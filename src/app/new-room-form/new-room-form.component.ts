@@ -1,12 +1,12 @@
 import { Component, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
 import { ChatRoomService } from '../services/chat-room.service';
 import { FormValue } from '../interfaces/form-value';
 import { SessionStorageService } from '../services/session-storage.service';
 @Component({
     selector: 'app-new-room-form',
-    imports: [CommonModule, ReactiveFormsModule],
+    imports: [ReactiveFormsModule],
     template: `
   <form [formGroup]="createRoomForm" (submit)="createRoom(createRoomForm.value)">
     <label for="createUsername">Username: </label>

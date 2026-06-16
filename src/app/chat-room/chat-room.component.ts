@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { ChatRoomService } from '../services/chat-room.service';
 import { MessageService } from '../services/message.service';
 import { Router } from '@angular/router';
@@ -13,22 +13,25 @@ import { HeaderComponent } from '../header/header.component';
 import { BadRoomComponent } from '../bad-room/bad-room.component';
 @Component({
     selector: 'app-chat-room',
-    imports: [CommonModule, MessageDisplayComponent, UsersDisplayComponent, HeaderComponent, BadRoomComponent],
+    imports: [MessageDisplayComponent, UsersDisplayComponent, HeaderComponent, BadRoomComponent],
     template: `
-  <div *ngIf="!badRoom" class="chat-room-container">
-    <app-header class="chat-room-header-area" [users]="this.chatRoom.users" [webSocket]="this.webSocket"></app-header>
-    <app-message-display class="message-feed-area" [roomName]="this.chatRoom.name" [messages]="this.chatRoom.messages"></app-message-display>
-    <div class="users-list-area">
-      <h2>Users List</h2>
-    <app-users-display [users]="this.chatRoom.users"></app-users-display>
+  @if (!badRoom) {
+    <div class="chat-room-container">
+      <app-header class="chat-room-header-area" [users]="this.chatRoom.users" [webSocket]="this.webSocket"></app-header>
+      <app-message-display class="message-feed-area" [roomName]="this.chatRoom.name" [messages]="this.chatRoom.messages"></app-message-display>
+      <div class="users-list-area">
+        <h2>Users List</h2>
+        <app-users-display [users]="this.chatRoom.users"></app-users-display>
+      </div>
+      <div class="chat-input-area">
+        <input class="message-input" type="text" #chatInput (keydown.enter)="submitMessage(chatInput)">
+        <button class="send-message" type="button" (keydown.enter)="submitMessage(chatInput)" (click)="submitMessage(chatInput)" >Send</button>
+      </div>
     </div>
-    <div class="chat-input-area">
-      <input class="message-input" type="text" #chatInput (keydown.enter)="submitMessage(chatInput)">
-      <button class="send-message" type="button" (keydown.enter)="submitMessage(chatInput)" (click)="submitMessage(chatInput)" >Send</button>
-    </div>
-  
-  </div>
-  <app-bad-room *ngIf="badRoom"></app-bad-room>
+  }
+  @if (badRoom) {
+    <app-bad-room></app-bad-room>
+  }
   `,
     styleUrls: ['./chat-room.component.scss']
 })

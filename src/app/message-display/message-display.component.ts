@@ -1,19 +1,21 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { Message } from '../interfaces/message';
 
 @Component({
     selector: 'app-message-display',
-    imports: [CommonModule],
+    imports: [],
     template: `
     <h2 class="room-name">Chat Room: {{roomName ? roomName : "Chat Room"}}</h2>
     <div class="message-feed" #messageWindow>
-     <div class="message" *ngFor="let message of this.messages; index as i;">
-       <span class="author">{{message.user?.username}}</span>
-       <span class="content">{{message.content}}</span>
-      </div>
+      @for (message of this.messages; track message; let i = $index) {
+        <div class="message">
+          <span class="author">{{message.user?.username}}</span>
+          <span class="content">{{message.content}}</span>
+        </div>
+      }
     </div>
-  `,
+    `,
     styleUrls: ['./message-display.component.scss']
 })
 export class MessageDisplayComponent {

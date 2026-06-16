@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 
 @Component({
     selector: 'app-modal',
-    imports: [CommonModule],
+    imports: [],
     template: `
     <div class="modal" (click)="toggleVisibility()">
       <div class="modal-container" (click)="$event.stopPropagation()">

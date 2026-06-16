@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { JoinRoomFormComponent } from '../join-room-form/join-room-form.component';
 import { ActivatedRoute } from '@angular/router';
 @Component({
     selector: 'app-join-room',
-    imports: [CommonModule, JoinRoomFormComponent],
+    imports: [JoinRoomFormComponent],
     template: `
   <div class="join-room-standalone">
     <h1>Join a room!</h1>

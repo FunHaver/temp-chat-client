@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 
 @Component({
     selector: 'app-page-not-found',
-    imports: [CommonModule],
+    imports: [],
     template: `
     <p>
       404!

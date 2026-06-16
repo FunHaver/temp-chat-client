@@ -1,12 +1,12 @@
 //@ts-nocheck
 import { Component, Input, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ChatRoomService } from '../services/chat-room.service';
 import { SessionStorageService } from '../services/session-storage.service';
 @Component({
     selector: 'app-join-room-form',
-    imports: [CommonModule, ReactiveFormsModule],
+    imports: [ReactiveFormsModule],
     template: `
   <form [formGroup]="joinRoomForm" (submit)="joinRoom(joinRoomForm.value)">
     <span>{{this.joinError}}</span>

@@ -1,16 +1,18 @@
 import { Component, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { User } from '../interfaces/user';
 
 @Component({
     selector: 'app-users-display',
-    imports: [CommonModule],
+    imports: [],
     template: `
   <div class="users-list">
     <ul>
-      <li *ngFor="let user of this.users; index as i;">
-        {{user.username}}
-      </li>
+      @for (user of this.users; track user; let i = $index) {
+        <li>
+          {{user.username}}
+        </li>
+      }
     </ul>
   </div>
   `,
