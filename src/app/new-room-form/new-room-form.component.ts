@@ -5,10 +5,9 @@ import { ChatRoomService } from '../services/chat-room.service';
 import { FormValue } from '../interfaces/form-value';
 import { SessionStorageService } from '../services/session-storage.service';
 @Component({
-  selector: 'app-new-room-form',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
-  template: `
+    selector: 'app-new-room-form',
+    imports: [CommonModule, ReactiveFormsModule],
+    template: `
   <form [formGroup]="createRoomForm" (submit)="createRoom(createRoomForm.value)">
     <label for="createUsername">Username: </label>
     <input id="createUsername" type="text" formControlName="username">
@@ -16,7 +15,7 @@ import { SessionStorageService } from '../services/session-storage.service';
     <button class="major-button" type="submit">Create Room</button>
 </form>
   `,
-  styleUrls: ['./new-room-form.component.scss']
+    styleUrls: ['./new-room-form.component.scss']
 })
 export class NewRoomFormComponent {
   createRoomForm = new FormGroup({

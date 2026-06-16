@@ -5,10 +5,9 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ChatRoomService } from '../services/chat-room.service';
 import { SessionStorageService } from '../services/session-storage.service';
 @Component({
-  selector: 'app-join-room-form',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
-  template: `
+    selector: 'app-join-room-form',
+    imports: [CommonModule, ReactiveFormsModule],
+    template: `
   <form [formGroup]="joinRoomForm" (submit)="joinRoom(joinRoomForm.value)">
     <span>{{this.joinError}}</span>
     <label for="joinUsername">Username: </label>
@@ -19,7 +18,7 @@ import { SessionStorageService } from '../services/session-storage.service';
     <button class="major-button" type="submit">Join Room</button>
 </form>
   `,
-  styleUrls: ['./join-room-form.component.scss']
+    styleUrls: ['./join-room-form.component.scss']
 })
 export class JoinRoomFormComponent {
   @Input() roomId: string | undefined = '';

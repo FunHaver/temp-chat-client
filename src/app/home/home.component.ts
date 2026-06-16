@@ -4,12 +4,11 @@ import { NewRoomFormComponent } from '../new-room-form/new-room-form.component';
 import { RestApiService } from '../services/rest-api.service';
 import { JoinRoomFormComponent } from '../join-room-form/join-room-form.component';
 @Component({
-  selector: 'app-home',
-  standalone: true,
-  imports: [CommonModule,
-            NewRoomFormComponent,
-            JoinRoomFormComponent],
-  template: `
+    selector: 'app-home',
+    imports: [CommonModule,
+        NewRoomFormComponent,
+        JoinRoomFormComponent],
+    template: `
   <div class="home-page-container">
     <div class="app-info">
     <h1 class="app-title">Temp Chat</h1>
@@ -24,7 +23,7 @@ import { JoinRoomFormComponent } from '../join-room-form/join-room-form.componen
   </div>
   </div>
   `,
-  styleUrls: ['./home.component.scss']
+    styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
   api: RestApiService = inject(RestApiService);

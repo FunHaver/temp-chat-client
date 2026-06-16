@@ -7,7 +7,6 @@ import { UsersDisplayComponent } from '../users-display/users-display.component'
 import { MobileRoomControlsComponent } from '../modal/modal.component';
 @Component({
     selector: 'app-header',
-    standalone: true,
     template: `
     <header class="full-width-header">
       <button (keydown.enter)="copyRoomLink()" (click)="leaveRoom()" class="header-button leave-button">Leave Room</button>

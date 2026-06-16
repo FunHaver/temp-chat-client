@@ -12,10 +12,9 @@ import { User } from '../interfaces/user';
 import { HeaderComponent } from '../header/header.component';
 import { BadRoomComponent } from '../bad-room/bad-room.component';
 @Component({
-  selector: 'app-chat-room',
-  standalone: true,
-  imports: [CommonModule, MessageDisplayComponent, UsersDisplayComponent, HeaderComponent, BadRoomComponent],
-  template: `
+    selector: 'app-chat-room',
+    imports: [CommonModule, MessageDisplayComponent, UsersDisplayComponent, HeaderComponent, BadRoomComponent],
+    template: `
   <div *ngIf="!badRoom" class="chat-room-container">
     <app-header class="chat-room-header-area" [users]="this.chatRoom.users" [webSocket]="this.webSocket"></app-header>
     <app-message-display class="message-feed-area" [roomName]="this.chatRoom.name" [messages]="this.chatRoom.messages"></app-message-display>
@@ -31,7 +30,7 @@ import { BadRoomComponent } from '../bad-room/bad-room.component';
   </div>
   <app-bad-room *ngIf="badRoom"></app-bad-room>
   `,
-  styleUrls: ['./chat-room.component.scss']
+    styleUrls: ['./chat-room.component.scss']
 })
 
 export class ChatRoomComponent {

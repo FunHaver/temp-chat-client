@@ -2,10 +2,9 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-page-not-found',
-  standalone: true,
-  imports: [CommonModule],
-  template: `
+    selector: 'app-page-not-found',
+    imports: [CommonModule],
+    template: `
     <p>
       404!
     </p>
@@ -13,7 +12,7 @@ import { CommonModule } from '@angular/common';
       <a href="/">Back to Home</a>
     </p>
   `,
-  styleUrls: ['./page-not-found.component.scss']
+    styleUrls: ['./page-not-found.component.scss']
 })
 export class PageNotFoundComponent {
   homeUrl: string = window.location.hostname;

@@ -2,10 +2,9 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-modal',
-  standalone: true,
-  imports: [CommonModule],
-  template: `
+    selector: 'app-modal',
+    imports: [CommonModule],
+    template: `
     <div class="modal" (click)="toggleVisibility()">
       <div class="modal-container" (click)="$event.stopPropagation()">
         <div class="modal-head">
@@ -18,7 +17,7 @@ import { CommonModule } from '@angular/common';
       </div>
     </div>
   `,
-  styleUrls: ['./modal.component.scss']
+    styleUrls: ['./modal.component.scss']
 })
 export class MobileRoomControlsComponent {
   @Input() visibilityBool!: boolean;

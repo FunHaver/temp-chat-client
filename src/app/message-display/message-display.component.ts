@@ -3,10 +3,9 @@ import { CommonModule } from '@angular/common';
 import { Message } from '../interfaces/message';
 
 @Component({
-  selector: 'app-message-display',
-  standalone: true,
-  imports: [CommonModule],
-  template: `
+    selector: 'app-message-display',
+    imports: [CommonModule],
+    template: `
     <h2 class="room-name">Chat Room: {{roomName ? roomName : "Chat Room"}}</h2>
     <div class="message-feed" #messageWindow>
      <div class="message" *ngFor="let message of this.messages; index as i;">
@@ -15,7 +14,7 @@ import { Message } from '../interfaces/message';
       </div>
     </div>
   `,
-  styleUrls: ['./message-display.component.scss']
+    styleUrls: ['./message-display.component.scss']
 })
 export class MessageDisplayComponent {
   @Input() messages!:Array<Message>

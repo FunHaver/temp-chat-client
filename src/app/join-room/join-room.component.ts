@@ -3,16 +3,15 @@ import { CommonModule } from '@angular/common';
 import { JoinRoomFormComponent } from '../join-room-form/join-room-form.component';
 import { ActivatedRoute } from '@angular/router';
 @Component({
-  selector: 'app-join-room',
-  standalone: true,
-  imports: [CommonModule, JoinRoomFormComponent],
-  template: `
+    selector: 'app-join-room',
+    imports: [CommonModule, JoinRoomFormComponent],
+    template: `
   <div class="join-room-standalone">
     <h1>Join a room!</h1>
     <app-join-room-form [roomId]="this.roomId"></app-join-room-form>
 </div>
   `,
-  styleUrls: ['./join-room.component.scss']
+    styleUrls: ['./join-room.component.scss']
 })
 export class JoinRoomComponent {
   roomId: string | undefined;
