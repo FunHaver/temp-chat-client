@@ -18,7 +18,7 @@ import { BadRoomComponent } from '../bad-room/bad-room.component';
   @if (!badRoom) {
     <div class="chat-room-container">
       <app-header class="chat-room-header-area" [users]="this.chatRoom.users" [webSocket]="this.webSocket"></app-header>
-      <app-message-display class="message-feed-area" [roomName]="this.chatRoom.name" [messages]="this.chatRoom.messages"></app-message-display>
+      <app-message-display class="message-feed-area" [roomName]="this.chatRoom.name" [messages]="this.chatRoom.messages" [currentUserId]="this.user.uniqueId"></app-message-display>
       <div class="users-list-area">
         <h2>Users List</h2>
         <app-users-display [users]="this.chatRoom.users"></app-users-display>

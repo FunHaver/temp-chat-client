@@ -9,7 +9,7 @@ import { Message } from '../interfaces/message';
     <h2 class="room-name">Chat Room: {{roomName ? roomName : "Chat Room"}}</h2>
     <div class="message-feed" #messageWindow>
       @for (message of this.messages; track message; let i = $index) {
-        <div class="message">
+        <div class="message" [class.self]="message.userId === currentUserId">
           <span class="author">{{message.user?.username}}</span>
           <span class="content">{{message.content}}</span>
         </div>
@@ -22,6 +22,7 @@ import { Message } from '../interfaces/message';
 export class MessageDisplayComponent {
   @Input() messages!:Array<Message>
   @Input() roomName!:string;
+  @Input() currentUserId!:string;
 
   @ViewChild("messageWindow", {static: false}) messageWindowRef: ElementRef<HTMLDivElement> | undefined;
   oldMessageLength: number = 0;

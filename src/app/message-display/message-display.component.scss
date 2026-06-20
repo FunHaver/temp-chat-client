@@ -6,9 +6,15 @@
     background-color: white;
     .message {
         margin: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        &.self {
+            align-items: flex-end;
+        }
         .author {
             display: block;
-            margin-right: 10px;
+
             font-weight: bold;
             width: auto;
         }
