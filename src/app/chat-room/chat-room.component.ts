@@ -11,9 +11,10 @@ import { UsersDisplayComponent } from '../users-display/users-display.component'
 import { User } from '../interfaces/user';
 import { HeaderComponent } from '../header/header.component';
 import { BadRoomComponent } from '../bad-room/bad-room.component';
+import { MobileRoomControlsComponent } from '../modal/modal.component';
 @Component({
     selector: 'app-chat-room',
-    imports: [MessageDisplayComponent, UsersDisplayComponent, HeaderComponent, BadRoomComponent],
+    imports: [MessageDisplayComponent, UsersDisplayComponent, HeaderComponent, BadRoomComponent, MobileRoomControlsComponent],
     template: `
   @if (!badRoom) {
     <div class="chat-room-container">
@@ -28,6 +29,12 @@ import { BadRoomComponent } from '../bad-room/bad-room.component';
         <button class="send-message" type="button" (keydown.enter)="submitMessage(chatInput)" (click)="submitMessage(chatInput)" >Send</button>
       </div>
     </div>
+    @if (connectionLost) {
+      <app-modal [visibilityBool]="connectionLost" [headerTitle]="'Connection Lost'" [hideCloseButton]="true">
+        <p>Your connection to the chat room was lost.</p>
+        <button (click)="leaveRoom()" class="leave-button">Leave Room</button>
+      </app-modal>
+    }
   }
   @if (badRoom) {
     <app-bad-room></app-bad-room>
@@ -45,9 +52,11 @@ export class ChatRoomComponent {
   webSocket!:WebSocket;
 
   badRoom:boolean;
+  connectionLost:boolean;
   webSocketUrl: string;
   constructor(private sessionStorageService:SessionStorageService, private router: Router){
     this.badRoom = false;
+    this.connectionLost = false;
     if(window.location.protocol.includes("https")){
       this.webSocketUrl = window.location.host.includes("localhost") ? "wss://localhost:3001" : `wss://${window.location.host}/ws`;
     } else {
@@ -96,7 +105,19 @@ export class ChatRoomComponent {
       webSocket.send(JSON.stringify({"ANNOUNCE": user}));
     }
 
+    this.webSocket.onclose = (event) => {
+      if (!event.wasClean) {
+        this.connectionLost = true;
+      }
+    };
 
+  }
+
+  leaveRoom(){
+    this.router.navigateByUrl('/');
+    this.sessionStorageService.setSessionRoom(null);
+    this.sessionStorageService.setSessionUser(null);
+    this.webSocket.close();
   }
   
   async submitMessage(chatInput:HTMLInputElement){

@@ -9,7 +9,9 @@ import { Component, EventEmitter, Input, Output, ChangeDetectionStrategy } from 
       <div class="modal-container" (click)="$event.stopPropagation()">
         <div class="modal-head">
           <h1>{{headerTitle}}</h1>
-          <button (click)="toggleVisibility()" class="close-button">X</button>
+          @if (!hideCloseButton) {
+            <button (click)="toggleVisibility()" class="close-button">X</button>
+          }
         </div>
         <div class="modal-body">
           <ng-content></ng-content>
@@ -23,6 +25,7 @@ import { Component, EventEmitter, Input, Output, ChangeDetectionStrategy } from 
 export class MobileRoomControlsComponent {
   @Input() visibilityBool!: boolean;
   @Input() headerTitle!: string;
+  @Input() hideCloseButton: boolean = false;
   @Output() modalVisChange = new EventEmitter<boolean>();
 
   toggleVisibility(){
