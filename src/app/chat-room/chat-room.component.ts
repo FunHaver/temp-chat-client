@@ -12,6 +12,7 @@ import { User } from '../interfaces/user';
 import { HeaderComponent } from '../header/header.component';
 import { BadRoomComponent } from '../bad-room/bad-room.component';
 import { MobileRoomControlsComponent } from '../modal/modal.component';
+import dayjs from 'dayjs';
 @Component({
     selector: 'app-chat-room',
     imports: [MessageDisplayComponent, UsersDisplayComponent, HeaderComponent, BadRoomComponent, MobileRoomControlsComponent],
@@ -54,6 +55,9 @@ export class ChatRoomComponent {
   badRoom:boolean;
   connectionLost:boolean;
   webSocketUrl: string;
+
+  heartbeatTimeout: number = 10000;
+  lastHeartbeat = dayjs()
   constructor(private sessionStorageService:SessionStorageService, private router: Router){
     this.badRoom = false;
     this.connectionLost = false;
@@ -96,6 +100,8 @@ export class ChatRoomComponent {
         this.chatRoom.users = serverMessage["USERLIST"];
       } else if(Object.hasOwn(serverMessage, "CHAT")){
         this.chatRoom.messages.push(serverMessage["CHAT"]);
+      } else if(Object.hasOwn(serverMessage,"HEARTBEAT")){
+          this.lastHeartbeat = dayjs();
       }
     };
 
@@ -111,6 +117,11 @@ export class ChatRoomComponent {
       }
     };
 
+    setInterval(() => {
+      if(Math.abs(this.lastHeartbeat.diff(dayjs())) > this.heartbeatTimeout){
+        this.connectionLost = true;
+      }
+    }, 5001);
   }
 
   leaveRoom(){
