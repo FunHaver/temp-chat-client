@@ -9,7 +9,7 @@ import { User } from '../interfaces/user';
   <div class="users-list">
     <ul>
       @for (user of this.users; track user; let i = $index) {
-        <li>
+        <li [style.text-decoration]="user.online ? 'none' : 'line-through'">
           {{user.username}}
         </li>
       }

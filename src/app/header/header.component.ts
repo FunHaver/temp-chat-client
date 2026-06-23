@@ -40,7 +40,7 @@ import { MobileRoomControlsComponent } from '../modal/modal.component';
       </app-modal>
     }
     @if (userListVisible) {
-      <app-modal [visibilityBool]="userListVisible" (modalVisChange)="userListVisible=$event" [headerTitle]="'Users List (' + users.length + ') Online'">
+      <app-modal [visibilityBool]="userListVisible" (modalVisChange)="userListVisible=$event" [headerTitle]="'Users List (' + onlineCount + ') Online'">
         <app-users-display class="users-list-modal" [users]="this.users"></app-users-display>
       </app-modal>
     }
@@ -94,6 +94,10 @@ export class HeaderComponent {
 
   showAbout(){
     this.aboutVisible = !this.aboutVisible;
+  }
+
+  get onlineCount(): number {
+    return this.users.filter(u => u.online).length;
   }
 
   showRoomControls(){
