@@ -43,6 +43,12 @@ header{
     overflow: scroll;
 }
 
+.header-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
 @media (max-width: 600px) {
     .full-width-header {
         display: none;

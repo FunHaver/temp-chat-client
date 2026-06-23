@@ -9,8 +9,11 @@ import { MobileRoomControlsComponent } from '../modal/modal.component';
     selector: 'app-header',
     template: `
     <header class="full-width-header">
-      <button (keydown.enter)="copyRoomLink()" (click)="leaveRoom()" class="header-button leave-button">Leave Room</button>
-      <button (keydown.enter)="copyRoomLink()" (click)="copyRoomLink()" class="header-button share-button">{{copyLinkMessage}}</button>
+      <button (keydown.enter)="leaveRoom()" (click)="leaveRoom()" class="header-button leave-button">Leave Room</button>
+      <div class="header-right">
+        <button (keydown.enter)="showAbout()" (click)="showAbout()" class="header-button about-button">?</button>
+        <button (keydown.enter)="copyRoomLink()" (click)="copyRoomLink()" class="header-button share-button">{{copyLinkMessage}}</button>
+      </div>
     </header>
     <header class="mobile-width-header">
       <button (keydown.enter)="showRoomControls()" (click)="showRoomControls()" class="header-button mobile-button" aria-label="Open menu">
@@ -32,12 +35,24 @@ import { MobileRoomControlsComponent } from '../modal/modal.component';
         <div class="room-controls-modal">
           <button (click)="leaveRoom()" class="leave-button">Leave Room</button>
           <button (click)="copyRoomLink()" class="share-button">{{copyLinkMessage}}</button>
+          <button (click)="showAbout()" class="about-button">?</button>
         </div>
       </app-modal>
     }
     @if (userListVisible) {
-      <app-modal [visibilityBool]="userListVisible" (modalVisChange)="userListVisible=$event" [headerTitle]="'Users List'">
+      <app-modal [visibilityBool]="userListVisible" (modalVisChange)="userListVisible=$event" [headerTitle]="'Users List (' + users.length + ') Online'">
         <app-users-display class="users-list-modal" [users]="this.users"></app-users-display>
+      </app-modal>
+    }
+    @if (aboutVisible) {
+      <app-modal [visibilityBool]="aboutVisible" (modalVisChange)="aboutVisible=$event" [headerTitle]="'About'">
+        <div class="about-modal">
+          <ul>
+            <li>When the last user leaves, the chat room is deleted.</li>
+            <li>Users can leave by closing the window/tab or by selecting the Leave Room button on the top left.</li>
+            <li>Users cannot rejoin a chat room with a name that has already been used.</li>
+          </ul>
+        </div>
       </app-modal>
     }
     `,
@@ -52,10 +67,12 @@ export class HeaderComponent {
   copyLinkMessage: string;
   roomControlsVisible: boolean;
   userListVisible: boolean;
+  aboutVisible: boolean;
   constructor(private router: Router, private sessionStorageService: SessionStorageService){
     this.copyLinkMessage = 'Copy Room Link';
     this.roomControlsVisible = false;
     this.userListVisible = false;
+    this.aboutVisible = false;
   }
 
   copyRoomLink(){
@@ -73,6 +90,10 @@ export class HeaderComponent {
     this.sessionStorageService.setSessionRoom(null);
     this.sessionStorageService.setSessionUser(null);
     this.webSocket.close();
+  }
+
+  showAbout(){
+    this.aboutVisible = !this.aboutVisible;
   }
 
   showRoomControls(){

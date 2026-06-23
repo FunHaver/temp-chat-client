@@ -23,6 +23,9 @@ import dayjs from 'dayjs';
       <app-message-display class="message-feed-area" [roomName]="this.chatRoom.name" [messages]="this.chatRoom.messages" [currentUserId]="this.user.uniqueId"></app-message-display>
       <div class="users-list-area">
         <h2>Users List</h2>
+        <div class="users-list-heading">
+          <h3>{{chatRoom.users.length}} Online</h3>
+        </div>
         <app-users-display [users]="this.chatRoom.users"></app-users-display>
       </div>
       <div class="chat-input-area">
