@@ -1,16 +1,20 @@
 import { Component, ElementRef, Input, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 
 import { Message } from '../interfaces/message';
+import { FormatTimestampPipe } from '../pipes/format-timestamp.pipe';
 
 @Component({
     selector: 'app-message-display',
-    imports: [],
+    imports: [FormatTimestampPipe],
     template: `
     <h2 class="room-name">Chat Room: {{roomName ? roomName : "Chat Room"}}</h2>
     <div class="message-feed" #messageWindow>
       @for (message of this.messages; track message; let i = $index) {
         <div class="message" [class.self]="message.userId === currentUserId">
-          <span class="author">{{message.user?.username}}</span>
+          <div class="heading">
+            <span class="author">{{message.user?.username}}</span>
+            <span class="timestamp">{{message.creationTime | formatTimestamp}}</span>
+          </div>
           <span class="content">{{message.content}}</span>
         </div>
       }

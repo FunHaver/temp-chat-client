@@ -12,12 +12,24 @@
         &.self {
             align-items: flex-end;
         }
-        .author {
-            display: block;
+        .heading {
+            display: flex;
+            align-items: center;
 
-            font-weight: bold;
-            width: auto;
+            .author {
+                display: block;
+                font-weight: bold;
+                width: auto;
+            }
+
+            .timestamp {
+                display: block;
+                color: #AAA;
+                font-size: 0.75em;
+                margin-left: 10px;
+            }
         }
+
     }
 }
 
